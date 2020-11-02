@@ -1,6 +1,7 @@
 package com.hicx.directorywatcher;
 
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -11,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.google.common.io.Files;
 import com.hicx.directorywatcher.processor.FileProcessor;
 import com.hicx.directorywatcher.processor.FileProcessorFactory;
 
@@ -40,7 +40,7 @@ public class DirectoryManager {
 
 	private void processDirectoryAndPrepareStat(WatchService watchService) {
 		try {
-
+			LOGGER.info("Started watching");
 			WatchKey key;
 			while ((key = watchService.take()) != null) {
 						Path path = (Path) key.watchable();
@@ -52,7 +52,8 @@ public class DirectoryManager {
 						String fileFullPath = fileDetails.getFileName().toAbsolutePath().toString();
 						LOGGER.info("Processing file : " + fileFullPath.toString());
 						
-						String extension = Files.getFileExtension(fileFullPath);
+						String extension = fileFullPath.substring(fileFullPath.lastIndexOf('.')+1);
+						
 
 						FileProcessor fileProcessor = FileProcessorFactory.getFileProcessor(extension.toUpperCase());
 						ConcurrentHashMap<String, Long> concurrentHashMap = new ConcurrentHashMap();
@@ -62,7 +63,6 @@ public class DirectoryManager {
 						long countWord = concurrentHashMap.get(ApplicationConstants.TOTAL_WORD)!=null?concurrentHashMap.get(ApplicationConstants.TOTAL_WORD):0;
 						long countDot = concurrentHashMap.get(ApplicationConstants.DOT)!=null?concurrentHashMap.get(ApplicationConstants.DOT):0;
 						long whitespaceCount = concurrentHashMap.get(ApplicationConstants.WHITE_SPACE)!=null?concurrentHashMap.get(ApplicationConstants.WHITE_SPACE):0;
-
 						LOGGER.info("Successfully completed " + fileDetails.getFileName() + " with whitespaceCount "
 								+ whitespaceCount + " count of dot " + countDot + " count of Word " + countWord
 								+ " max repeated word : " + dataExtractor.keyWithMaxCount());
