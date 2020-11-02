@@ -1,6 +1,8 @@
-package com.hicx.directorywatcher;
+package com.hicx.directorywatcher.processor;
 
 import java.nio.file.Path;
+
+import com.hicx.directorywatcher.DataExtractor;
 
 public interface FileProcessor {
 

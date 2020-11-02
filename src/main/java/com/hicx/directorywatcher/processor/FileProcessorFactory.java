@@ -1,4 +1,4 @@
-package com.hicx.directorywatcher;
+package com.hicx.directorywatcher.processor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,7 @@ public class FileProcessorFactory {
 	private static Map<String,FileProcessor> fileProcessorMap = new HashMap();
 	static {
 		fileProcessorMap.put("TEXT",new TextFileProcessor());
+		fileProcessorMap.put("TXT",new TextFileProcessor());
 	}
 	
 	public static FileProcessor getFileProcessor(String extension) {

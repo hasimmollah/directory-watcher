@@ -1,6 +1,7 @@
 package com.hicx.directorywatcher;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,12 +17,11 @@ public class DataExtractor {
 		String[] splittedWords = sentense.split(ApplicationConstants.WHITE_SPACE_DELEMETER);
 		Long countOfWhiteSpace = wordCountMap.get(ApplicationConstants.WHITE_SPACE);
 		Long countOfWord = wordCountMap.get(ApplicationConstants.TOTAL_WORD);
-		
+
 		long wordLength = splittedWords.length;
 		wordCountMap.put(ApplicationConstants.WHITE_SPACE,
 				countOfWhiteSpace != null ? (countOfWhiteSpace + wordLength - 1) : wordLength - 1);
-		
-		
+
 		wordCountMap.put(ApplicationConstants.TOTAL_WORD,
 				countOfWord != null ? (countOfWord + wordLength) : wordLength);
 
@@ -36,7 +36,10 @@ public class DataExtractor {
 
 	public String keyWithMaxCount() {
 
-		return wordCountMap.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+		return wordCountMap.entrySet().stream()
+				.filter(entry -> !(ApplicationConstants.WHITE_SPACE.equalsIgnoreCase(entry.getKey())
+						|| ApplicationConstants.TOTAL_WORD.equalsIgnoreCase(entry.getKey())
+						|| ApplicationConstants.DOT.equalsIgnoreCase(entry.getKey())))
+				.max(Map.Entry.comparingByValue()).get().getKey();
 	}
-
 }

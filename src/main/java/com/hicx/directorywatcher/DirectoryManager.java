@@ -12,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.log4j.Logger;
 
 import com.google.common.io.Files;
+import com.hicx.directorywatcher.processor.FileProcessor;
+import com.hicx.directorywatcher.processor.FileProcessorFactory;
 
 public class DirectoryManager {
 	final static Logger LOGGER = Logger.getLogger(DirectoryManager.class);

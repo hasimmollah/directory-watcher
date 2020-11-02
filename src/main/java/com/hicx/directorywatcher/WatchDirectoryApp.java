@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Main class to watch and process files in the directory specified in the input
+ * @author hasmolla
+ *
+ */
 public class WatchDirectoryApp {
 	 final static Logger LOGGER = Logger.getLogger(WatchDirectoryApp.class);
 
