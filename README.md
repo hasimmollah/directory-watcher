@@ -10,5 +10,5 @@ once a new file is inserted, application reads the file
 ###### It abled to process 10.5 GB file in 1.5 mins
 
 ###### As design of this application involved lots of string handling, have to use following JVM parameter for better memory utilization
- - -XX:+UseG1GC : to use G1 GC
+ - -XX:+UseG1GC : to use G1 Garbage Collection
  - -XX:+UseStringDeduplication : to reuse same string literal as char array.
