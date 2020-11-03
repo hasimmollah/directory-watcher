@@ -62,9 +62,9 @@ public class DirectoryManager {
 						long countWord = concurrentHashMap.get(ApplicationConstants.TOTAL_WORD)!=null?concurrentHashMap.get(ApplicationConstants.TOTAL_WORD):0;
 						long countDot = concurrentHashMap.get(ApplicationConstants.DOT)!=null?concurrentHashMap.get(ApplicationConstants.DOT):0;
 						long whitespaceCount = concurrentHashMap.get(ApplicationConstants.WHITE_SPACE)!=null?concurrentHashMap.get(ApplicationConstants.WHITE_SPACE):0;
-						LOGGER.info("Successfully completed " + fileDetails.getFileName() + " with whitespaceCount "
-								+ whitespaceCount + " count of dot " + countDot + " count of Word " + countWord
-								+ " max repeated word : " + dataExtractor.keyWithMaxCount());
+						LOGGER.info("Successfully completed " + fileDetails.getFileName() + " with whitespaceCount: "
+								+ whitespaceCount + " , count of dot: " + countDot + " , count of Word: " + countWord
+								+ " , max repeated word : " + dataExtractor.keyWithMaxCount());
 
 					} catch (Exception e) {
 						LOGGER.error("Exception occurred while processing", e);
