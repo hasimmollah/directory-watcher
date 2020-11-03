@@ -10,6 +10,6 @@ once a new file is inserted, application reads the file
 ###### It abled to process 10.5 GB file in 1.5 mins
 
 ###### As design of this application involved lots of string handling, have to use following JVM parameter for better memory utilization
- - -Xms2048m : to use momory
- - -XX:+UseG1GC : to use G1 Garbage Collection
+ - -Xms2048m : To specify initial memory
+ - -XX:+UseG1GC : To use G1 Garbage Collection
  - -XX:+UseStringDeduplication : To remove duplicate same string literal, jvm removes underlying char []
