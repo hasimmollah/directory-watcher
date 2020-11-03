@@ -6,7 +6,7 @@ once a new file is inserted, application reads the file
 	- Total number of words
 	- Number of DOT (.)
 	- The word repeated most.
-###### Once file has been processed, it's moved to a directory - <<user home directory>>/processed
+###### Once file has been processed, it's moved to a directory - << user home directory >>/processed
 ###### It abled to process 10.5 GB file in 1.5 mins
 
 ###### As design of this application involved lots of string handling, have to use following JVM parameter for better memory utilization
