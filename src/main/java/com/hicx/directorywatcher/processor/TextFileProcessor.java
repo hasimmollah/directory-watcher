@@ -1,9 +1,12 @@
 package com.hicx.directorywatcher.processor;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -18,17 +21,23 @@ public class TextFileProcessor implements FileProcessor{
 
 
 	public void process(Path fileDetails, DataExtractor dataExtractor) {
+		LOGGER.info("Started process method");
 		try {
 			File file = new File(fileDetails.toAbsolutePath().toString());
-		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
-		lines.stream().forEach(line->{
-			dataExtractor.extractData(line);
-		});
-		String userDirectory = FileSystems.getDefault()
-                .getPath("")
-                .toAbsolutePath()
-                .toString();
+		LOGGER.info("Started processing file");
+		 Files.lines(fileDetails, StandardCharsets.UTF_8).parallel().forEach(line->{
+				dataExtractor.extractData(line);
+			});
+		LOGGER.info("Finished processing file");
+		String userDirectory = FileUtils.getUserDirectory().getAbsolutePath();
 		
+		
+		Path destinationPath = Paths.get(userDirectory+ApplicationConstants.PROCESED_DIRECTORY_PATH+"/"+file.getName());
+		File destinationFile = destinationPath.toFile();
+		if(destinationFile.exists()) {
+			destinationFile.delete();
+			LOGGER.info("File already exist and finished deleting");
+		}
 		FileUtils.moveFileToDirectory(
 				file, 
 			      FileUtils.getFile(userDirectory+ApplicationConstants.PROCESED_DIRECTORY_PATH), true);
@@ -36,6 +45,9 @@ public class TextFileProcessor implements FileProcessor{
 		} catch(Exception e) {
 			throw new ApplicationException(e);
 		}
+		
+		
+		LOGGER.info("Finished process method");
 	}
 
 }

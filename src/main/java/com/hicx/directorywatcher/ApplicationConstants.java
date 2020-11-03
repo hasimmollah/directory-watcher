@@ -8,5 +8,6 @@ public class ApplicationConstants {
 	public static final String PROCESED_DIRECTORY_PATH = "/processed/";
 	
 	public static final String DOT = ".";
+	public static final String EMPTY_STR = "";
 
 }

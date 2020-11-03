@@ -43,17 +43,16 @@ public class DirectoryManager {
 			LOGGER.info("Started watching");
 			WatchKey key;
 			while ((key = watchService.take()) != null) {
+				LOGGER.info("Searching for inserted file in the directory");
 						Path path = (Path) key.watchable();
 				for (WatchEvent<?> event : key.pollEvents()) {
-
 					try {
-						LOGGER.info("Event kind:" + event.kind() + ". File affected: " + event.context() + ".");
+						LOGGER.info("Event kind:" + event.kind() + ". File found : " + event.context() + ".");
 						Path fileDetails = path.resolve(((WatchEvent<Path>) event).context());
 						String fileFullPath = fileDetails.getFileName().toAbsolutePath().toString();
 						LOGGER.info("Processing file : " + fileFullPath.toString());
 						
 						String extension = fileFullPath.substring(fileFullPath.lastIndexOf('.')+1);
-						
 
 						FileProcessor fileProcessor = FileProcessorFactory.getFileProcessor(extension.toUpperCase());
 						ConcurrentHashMap<String, Long> concurrentHashMap = new ConcurrentHashMap();
