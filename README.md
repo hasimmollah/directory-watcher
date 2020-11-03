@@ -6,4 +6,5 @@ find following:
 	total number of words
 	number of DOT (.)
 	the word repeated most.
+Once file has been processed, it's moved to a directory - <<user home directory>>/processed
 It abled to process 10.5 GB file in 1.5 mins
